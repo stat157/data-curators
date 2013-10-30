@@ -1,0 +1,17 @@
+# Compiled source #
+###################
+*.pyc
+
+# Packages #
+############
+*.gz
+*.tar
+
+# In-Progress #
+###############
+*.py~
+
+# data files  #
+###############
+*.catalog
+*.csv
