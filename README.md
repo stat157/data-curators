@@ -16,7 +16,7 @@ Members Stats:
 | Jie Zhang| 4th |  Stats | jzhang980@berk |
 | Sherry Xia (xsherryxia)| 4th | Stats/Legal Studies | x_sherry_xia@berk|
 | Kimberly Le| 4th | Stats/Cognitive Science | kimberly_le@berk|
-| Arif Ali| 4th | Statistics (with a concentration in energy policy)|arifyali@berk|
+| Arif Ali| 4th | Stats|arifyali@berk|
 
 
 
