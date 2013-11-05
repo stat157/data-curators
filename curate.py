@@ -6,7 +6,7 @@ import pandas as pd
 def download_extract_data(src_url,file_name, extract_dir):
     '''
     Given a src_url, downloads the archived earthquake data.
-    Then, extracts the data into the extract_dir. 
+    Then, extracts the data into the extract_dir.
     Will create extract_dir if it doesn't exist.
     '''
     print "Download initialized"
@@ -26,7 +26,7 @@ def download_extract_data(src_url,file_name, extract_dir):
 
 
 def get_catalog_dict(catalog_dir):
-    ''' 
+    '''
     Given a directory, dict of  *.catalog in the directory.
     Includes RELATIVE location of the file, as well as the name.
     dict <K,V> format of <relative_path_dir+file_name, file_name>
@@ -63,7 +63,7 @@ def output_csv(catalog_path, catalog_name, output_dir):
     Given the path and the name of the catalog,
     Outputs the catalog into output_dir.
     '''
-    head_size = 0 
+    head_size = 0
     f = open(catalog_path, 'r')
     #figure out how many lines to skip!
     for line in f:
@@ -77,6 +77,7 @@ def output_csv(catalog_path, catalog_name, output_dir):
 
     data_frame = pd.read_csv(catalog_path, header=head_row_loc, skiprows=skip_length, delimiter=r"\s+")
     #data_frame.rename(columns={"#YYY/MD/DD": "YYYY/MD/DD"}, inplace=True)
+    ##Reported that last 2 rows are dirty data. @TODO add clean procedure here.
     data_frame.rename(columns=lambda x: x.replace("#YYY", "YYYY"), inplace=True)
     data_frame.to_csv(os.path.join(output_dir, catalog_name+".csv"), index = False)
 
