@@ -29,24 +29,30 @@ iran.quakes
 
 ###  CONVERTING CLEAN DATA INTO PPX ====================================================
 
-data1933 <-read.csv("./clean_data/1933.catalog.csv")
-data1933 = data1933[1:(nrow(data1933)-2),]
+cleandata <-read.csv("./CleanData1938-2013.csv")
 
-### Notice data1933["HH.mm.SS.ss"] does not contain real numbers,  by looking at jap.quakes,  we need to create a time variable
-dates <-data1933[["YYYY.MM.DD"]]
-times <-data1933[["HH.mm.SS.ss"]]
+### Notice cleandata["HH.mm.SS.ss"] does not contain real numbers,  by looking at jap.quakes,  we need to create a time variable
+dates <-cleandata[["YYYY.MM.DD"]]
+times <-cleandata[["HH.mm.SS.ss"]]
 
 datatime <-as.POSIXct(strptime(paste(dates, times), "%Y/%m/%d %H:%M:%OS"))
 
 newtime <-as.numeric(difftime(datatime,datatime[1],units="days"))
 
-NewData1933 <-data.frame(long=data1933[["LON"]], lat=data1933[["LAT"]], 
-                          time=newtime, mag =data1933[["MAG"]], 
-                          mag.type=data1933[["M"]], depth=data1933[["DEPTH"]], 
-                          ref=data1933[["EVID"]], date=data1933[["YYYY.MM.DD"]])
-PPX1933 = ppx(data=NewData1933,domain=c(c(1,2),c(2,3),c(3,4)),
-                coord.type =c("s", "s", "t", "m", "m", "m", "m", "m"))
-PPX1933
+
+Newcleandata <-data.frame(long=cleandata[["LON"]], lat=cleandata[["LAT"]], 
+                          time=newtime, mag =cleandata[["MAG"]], 
+                          mag.type=cleandata[["M"]], depth=cleandata[["DEPTH"]], 
+                          ref=cleandata[["EVID"]], date=cleandata[["YYYY.MM.DD"]])
+
+timedomain = c(floor(min(Newcleandata$time)),ceiling(max(Newcleandata$time)))
+longdomain = c(floor(min(Newcleandata$long)),ceiling(max(Newcleandata$long)))
+latdomain = c(floor(min(Newcleandata$lat)),ceiling(max(Newcleandata$lat)))
+ppxdomain = boxx(t=timedomain,lon=longdomain,lat=latdomain)
+
+CalPPX = ppx(data=Newcleandata,domain=ppxdomain,
+             coord.type =c("s", "s", "t", "m", "m", "m", "m", "m"))
+
+CalPPX
 
 ### ROADBLOCKS ==========================================================================
-# Data is not clean. Last two rows have non-relevant content
