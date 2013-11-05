@@ -78,6 +78,9 @@ def output_csv(catalog_path, catalog_name, output_dir):
     data_frame = pd.read_csv(catalog_path, header=head_row_loc, skiprows=skip_length, delimiter=r"\s+")
     #data_frame.rename(columns={"#YYY/MD/DD": "YYYY/MD/DD"}, inplace=True)
     ##Reported that last 2 rows are dirty data. @TODO add clean procedure here.
+    data_frame = data_frame.dropna()
+    data_frame = data_frame[data_frame.MAG != ''] 
+    data_frame = data_frame[data_frame.MAG != None]
     data_frame.rename(columns=lambda x: x.replace("#YYY", "YYYY"), inplace=True)
     data_frame.to_csv(os.path.join(output_dir, catalog_name+".csv"), index = False)
 
