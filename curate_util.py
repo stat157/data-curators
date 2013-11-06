@@ -1,10 +1,9 @@
 #Author: Tristan Tao
 
-from pandas import read_csv
 from pandas import concat
 import pandas as pd
-import re
 import os
+import re
 
 
 def grab_data_dict(start_year, end_year, target_dir):
@@ -26,13 +25,29 @@ def grab_data_dict(start_year, end_year, target_dir):
                     catalog_extraction[os.path.join(curdir, check_file)] = extracted_year
     return catalog_extraction
 
-def grab_data_frame(catalog_dict):
+def grab_data_frame(catalog_dict, convert_datetime = False):
     '''
-    Given a catalog_dict, 
+    Given a catalog_dict, returns the actual corresponding dataframe.
+    Does additional conversion when specifying datatime = True. It will
+    actually reutrn a column with datetime object in it.
     '''
     data_frame = pd.DataFrame()
+    total_processed = 0
     for csv_location, year in catalog_dict.items():
         partial_data = pd.read_csv(csv_location)
-        data_frame = concat([data_frame, partial_data])
+        if convert_datetime:
+            partial_data["datetime"] = ""
+            end_index = len(partial_data["YYYY/MM/DD"])
+            print "\nTotal rows in year %s : %s" % (year, end_index)
+            for i in xrange(end_index):
+                total_processed += 1
+                partial_data["datetime"][i] = str(partial_data["YYYY/MM/DD"][i]) + " " +str(partial_data["HH:mm:SS.ss"][i])
+                if total_processed % 10000 == 0:
+                    print "Cumulative processed %s" % total_processed
+            partial_data["datetime"]= pd.to_datetime(partial_data["datetime"])
+
+    data_frame = concat([data_frame, partial_data])
+
     return data_frame
+
 
