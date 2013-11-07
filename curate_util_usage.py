@@ -30,4 +30,5 @@ if __name__ == "__main__":
     data_frame  = CU.grab_data_frame(catalog_dict)
     rows = random.sample(data_frame.index, 250)
     df_250 = data_frame.ix[rows]
+    df_250.to_csv(os.path.join(os.getcwd(), "250.csv"), index = False)
     print df_250
