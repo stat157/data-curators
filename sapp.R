@@ -20,6 +20,7 @@ lat <-cleandata[["LAT"]]
 magnitude <-cleandata[["MAG"]]
 
 times <-cleandata[["HH.mm.SS.ss"]]
+dates <-cleandata[["YYYY.MM.DD"]]
 datatime <-as.POSIXct(strptime(paste(dates, times), "%Y/%m/%d %H:%M:%OS"))
 newtime <-as.numeric(difftime(datatime,datatime[1],units="days"))
 
