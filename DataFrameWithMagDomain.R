@@ -33,7 +33,8 @@ iran.quakes
 ###  Box: [0, 40329] x [41, 69] x [20.5, 44.5] units  
 
 cleandata <-read.csv("/Users/runliang/Desktop/CleanData1938-2013.csv")
-cleandata=cleandata[cleandata["MAG"]>4,]
+cleandata=cleandata[cleandata["MAG"]>4.5,]
+write.csv(cleandata,file="DataFrameWithMag4_5.csv")
 
 
 ### Notice cleandata["HH.mm.SS.ss"] does not contain real numbers,  by looking at jap.quakes,  we need to create a time variable
@@ -60,13 +61,13 @@ CalPPX = ppx(data=Newcleandata,domain=ppxdomain,
 
 CalPPX
 ### Multidimensional point pattern
-### 2027 points 
+### 640 points 
 ### 2-dimensional space coordinates (long,lat)
 ### 1-dimensional time coordinates (time)
 ### 5 columns of marks: ‘mag’, ‘mag.type’, ‘depth’, ‘ref’ and ‘date’ 
 ### Domain:
 ###  3-dimensional box:
-###  [0, 27670] x [-122, -114] x [32, 37] units  
+###  [0, 27441] x [-122, -114] x [32, 37] units  
 
 ### DATAFRAME FOR SAPP ==============================================================
 
@@ -77,7 +78,7 @@ data(main2003JUL26)
 head(main2003JUL26)
 
 cleandata <-read.csv("/Users/runliang/Desktop/CleanData1938-2013.csv")
-cleandata=cleandata[cleandata["MAG"]>4,]
+cleandata=cleandata[cleandata["MAG"]>4.5,]
 write.csv(cleandata,file="DataFrameWithMag>4.csv")
 
 ### Notice cleandata["HH.mm.SS.ss"] does not contain real numbers,  by looking at jap.quakes,  we need to create a time variable
@@ -97,22 +98,21 @@ day <- as.numeric(strftime(datatime, format="%d"))
 
 sappdf = data.frame(no.= numbers,longitude=long,latitude=lat,magnitude=magnitude,
            time=newtime,depth=depth,year=year,month=month,day=day)
-write.csv(cleandata,file="DataFrameWithMag4.csv")
 
 head(sappdf)
-### no. longitude latitude magnitude     time depth year month day
-### 1   1  -116.382   33.383      4.41  0.00000     6 1938     1   4
-### 2   2  -116.114   34.160      4.05 35.29864     6 1938     2   8
-### 3   3  -116.165   34.216      4.27 42.30296     6 1938     2  15
-### 4   4  -116.194   34.638      4.07 86.69050     6 1938     3  31
-### 5   5  -115.047   32.560      4.81 98.66332     6 1938     4  12
-### 6   6  -115.272   32.480      4.84 99.79192     6 1938     4  13
+###     no. longitude latitude magnitude       time depth year month day
+### 1   1  -115.047   32.560      4.81   0.000000   6.0 1938     4  12
+### 2   2  -115.272   32.480      4.84   1.128604   6.0 1938     4  13
+### 3   3  -118.200   32.600      4.68  15.571450   6.0 1938     4  28
+### 4   4  -117.511   33.699      5.23  48.673868  10.2 1938     5  31
+### 5   5  -115.191   32.273      4.92  54.429268   6.0 1938     6   6
+### 6   6  -116.047   34.818      4.54 127.635547   6.0 1938     8  18
 
 tail(sappdf)
-###        no. longitude latitude magnitude     time depth year month day
-### 2022 2022  -121.470   36.757      4.06 27569.10   6.9 2013     6  28
-### 2023 2023  -118.287   35.486      4.29 27595.64   6.6 2013     7  24
-### 2024 2024  -120.957   34.567      4.06 27625.99   3.2 2013     8  24
-### 2025 2025  -118.285   35.480      4.20 27627.72   2.3 2013     8  25
-### 2026 2026  -115.215   32.411      4.08 27647.37  10.0 2013     9  14
-### 2027 2027  -116.294   34.709      4.28 27669.03   1.9 2013    10   6
+###     no. longitude latitude magnitude     time depth year month day
+### 635 635  -115.540   33.019      5.44 27165.15   8.2 2012     8  26
+### 636 636  -115.531   33.028      4.61 27165.26   7.4 2012     8  26
+### 637 637  -115.519   33.021      4.90 27165.47   4.1 2012     8  27
+### 638 638  -120.847   36.324      5.30 27220.56  15.8 2012    10  21
+### 639 639  -116.457   33.502      4.70 27361.98  13.1 2013     3  11
+### 640 640  -119.926   34.413      4.80 27440.88   8.0 2013     5  29
