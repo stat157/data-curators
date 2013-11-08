@@ -60,13 +60,13 @@ CalPPX = ppx(data=Newcleandata,domain=ppxdomain,
 
 CalPPX
 ### Multidimensional point pattern
-### 1528 points 
+### 2027 points 
 ### 2-dimensional space coordinates (long,lat)
 ### 1-dimensional time coordinates (time)
 ### 5 columns of marks: ‘mag’, ‘mag.type’, ‘depth’, ‘ref’ and ‘date’ 
 ### Domain:
 ###  3-dimensional box:
-###  [0, 21754] x [-122, -114] x [32, 37] units  
+###  [0, 27670] x [-122, -114] x [32, 37] units  
 
 ### DATAFRAME FOR SAPP ==============================================================
 
@@ -97,7 +97,7 @@ day <- as.numeric(strftime(datatime, format="%d"))
 
 sappdf = data.frame(no.= numbers,longitude=long,latitude=lat,magnitude=magnitude,
            time=newtime,depth=depth,year=year,month=month,day=day)
-write.csv(cleandata,file="DataFrameWithMag>4.csv")
+write.csv(cleandata,file="DataFrameWithMag4.csv")
 
 head(sappdf)
 ### no. longitude latitude magnitude     time depth year month day
@@ -109,11 +109,10 @@ head(sappdf)
 ### 6   6  -115.272   32.480      4.84 99.79192     6 1938     4  13
 
 tail(sappdf)
-
-### no. longitude latitude magnitude     time depth year month day
-### 1523 1523  -118.109   32.681      4.76 21717.13   6.0 1997     6  20
-### 1524 1524  -118.137   32.685      4.18 21717.17   6.0 1997     6  20
-### 1525 1525  -118.151   32.626      4.53 21717.27   6.0 1997     6  20
-### 1526 1526  -117.336   34.168      4.18 21725.84  10.0 1997     6  28
-### 1527 1527  -117.638   35.791      4.25 21730.68   4.7 1997     7   3
-### 1528 1528  -116.349   33.398      4.89 21753.07  12.2 1997     7  26
+###        no. longitude latitude magnitude     time depth year month day
+### 2022 2022  -121.470   36.757      4.06 27569.10   6.9 2013     6  28
+### 2023 2023  -118.287   35.486      4.29 27595.64   6.6 2013     7  24
+### 2024 2024  -120.957   34.567      4.06 27625.99   3.2 2013     8  24
+### 2025 2025  -118.285   35.480      4.20 27627.72   2.3 2013     8  25
+### 2026 2026  -115.215   32.411      4.08 27647.37  10.0 2013     9  14
+### 2027 2027  -116.294   34.709      4.28 27669.03   1.9 2013    10   6
