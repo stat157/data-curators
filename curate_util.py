@@ -25,7 +25,7 @@ def grab_data_dict(start_year, end_year, target_dir):
                     catalog_extraction[os.path.join(curdir, check_file)] = extracted_year
     return catalog_extraction
 
-def grab_data_frame(catalog_dict, convert_datetime = False):
+def grab_data_frame(catalog_dict, convert_datetime = False, minimum_magnitude = 0.0):
     '''
     Given a catalog_dict, returns the actual corresponding dataframe.
     Does additional conversion when specifying datatime = True. It will
@@ -45,9 +45,7 @@ def grab_data_frame(catalog_dict, convert_datetime = False):
                 if total_processed % 10000 == 0:
                     print "Cumulative processed %s" % total_processed
             partial_data["datetime"]= pd.to_datetime(partial_data["datetime"])
-
-    data_frame = concat([data_frame, partial_data])
-
+        data_frame = concat([data_frame, partial_data])
+    data_frame = data_frame[data_frame.MAG > minimum_magnitude]
     return data_frame
-
 
