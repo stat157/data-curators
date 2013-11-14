@@ -5,6 +5,9 @@ The repo is for curators in the earthquake prediction project.
 - Uncompress, extract, and parse the data into a pandas time-series data format
 - The curated data will contain columns of variables for analyzers to analyze
 
+[Our Results](https://github.com/stat157/data-curators/wiki/Curated-Data)
+==========
+
 
 Members Stats: 
 
